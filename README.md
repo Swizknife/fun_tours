@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# 🗺️ Sightseeing Route Planner with AI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web app that helps users plan a more enjoyable road trip. Given a start and destination, it shows **interesting places (POIs)** along the route and predicts **how much time** a traveler might spend at each one using a **machine learning model**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- 🧭 Input any starting point and destination
+- 📍 Discover Points of Interest (POIs) like:
+  - Museums, monuments, restaurants, parks, etc.
+- 🔮 Predict how long users might spend at each stop using a trained regression model
+- 🗺️ Display route and stops on an interactive map
+- 🧾 Summary of total driving time, stop time, and trip time
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🧠 AI Component
 
-### `npm test`
+- Uses **Linear Regression** (via Scikit-learn)
+- Trained on sample data with:
+  - POI type (historic, restaurant, etc.)
+  - Category (tourism, amenity, shop, etc.)
+  - Distance from route
+- Predicts estimated **visit time (minutes)** for each POI
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Tech Stack
+ Layer     - Technology              
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ Frontend  - React.js, Leaflet        |
+ Backend   - Flask (Python) + scikit-learn 
+ Data/API  -  OpenRouteService, Overpass API 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ 📁 Folder Structure
+sightseeing-route-app/
+├── public/
+├── src/
+│ ├── components/
+│ │ └── Map.js
+│ └── App.js
+├── predictor.py # Python Flask backend for prediction
+├── poi_data.csv # Sample dataset for training
+├── model.pkl # Trained regression model
+├── le_type.pkl # Type label encoder
+├── le_cat.pkl # Category label encoder
+├── README.md
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ Setup Instructions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the Repository
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+git clone https://github.com/Swizknife/sightseeing-route-app.git
+cd sightseeing-route-app
 
-## Learn More
+2.Frontend Setup
+npm install
+npm start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3.Backend Setup(Python + flask+ML)
+pip install flask pandas scikit-learn joblib
+python predictor.py
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+the model will serve at-
+http://localhost:5000/predict
 
-### Code Splitting
+ How to Use
+1. Enter a **Start** and **Destination**
+2. Choose a POI Category (Tourism, Restaurant, etc.)
+3. Click **Search Route & POIs**
+4. View:
+   - Driving route on the map
+   - Suggested places along the way
+   - Predicted visit time at each POI
+   - Trip summary (total time, distance, stop time)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+Example Dataset (poi_data.csv)
+name,type,distance_to_route,category,time_spent
+Red Fort,historic,2.4,tourism,45
+Cafe Mocha,restaurant,0.5,amenity,30
+Zoo,leisure,2.0,tourism,35
+Big Mall,shop,3.1,shop,60
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+ APIs Used
+OpenRouteService API - for directions and coordinates
+Overpass API - for POI data from OpenStreetMap
+Local Flask server - for AI predictions
 
-### Making a Progressive Web App
+ Future Ideas
+Replace Linear Regression with Random Forest or XGBoost
+Calculate real distance from POI to the route
+Add filters for opening hours, ratings, etc.
+Learn from actual trip histories (collaborative filtering)
+Deploy full stack online (Render, Vercel, Railway, etc.)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

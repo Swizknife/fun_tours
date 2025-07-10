@@ -1,0 +1,6 @@
+name,type,distance_to_route,category,time_spent
+Red Fort,historic,2.4,tourism,45
+National Museum,historic,1.1,tourism,40
+Cafe Mocha,restaurant,0.5,amenity,30
+Zoo,leisure,2.0,tourism,35
+Big Mall,shop,3.1,shop,60
